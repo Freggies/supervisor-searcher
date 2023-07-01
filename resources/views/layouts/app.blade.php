@@ -29,7 +29,7 @@
 
             <!-- Page Content -->
             <main>
-            @include('user.index')
+
             </main>
         </div>
     </body>

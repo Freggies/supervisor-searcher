@@ -57,4 +57,12 @@ class LecturerController extends Controller
 
     }
 
+    public function showLecturers()
+    {
+        $lecturers = Lecturer::paginate(10); 
+
+        return view('supervisor.index', ['lecturers' => $lecturers]);
+        
+    }
+
 }
