@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('project_titles', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('lecturer_id');
             $table->timestamps();
         });
     }

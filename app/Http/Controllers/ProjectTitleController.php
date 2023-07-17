@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProjectTitle;
+use App\Models\Lecturer;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 
@@ -33,24 +34,20 @@ class ProjectTitleController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|max:255',
+            'id' => 'required|exists:lecturers,id'
         ]);
 
         // Save the project title in the database
         $projecttitles = new ProjectTitle();
         $projecttitles->title = $validatedData['title'];
+        $projecttitles->id = $validatedData['id'];
         $projecttitles->save();
 
         return redirect()->route('projecttitle.create')->with('success', 'Project title has been saved successfully!');
     }
 
 
-    public function showProjects()
-    {
-        $project_titles = ProjectTitle::paginate(10); 
 
-        return view('supervisor.index', ['project_titles' => $project_titles]);
-        
-    }
 
 
     /**

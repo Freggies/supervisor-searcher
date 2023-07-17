@@ -24,26 +24,21 @@
                                                 Status
                                             </th>
                                             <th scope="col" class="relative px-6 py-3">
-                                                <span class="sr-only">Add Supervisor</span>
+                                                <span class="sr-only"></span>
                                             </th>
                                         </tr>
                                         </thead>
                                         <tbody class="bg-white divide-y divide-gray-200">
                                         @foreach ($lecturers as $lecturer)
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                {{ $lecturer->name }}
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                @foreach ($lecturer -> $project_titles as $titles)
-                                                  {{ $titles->title }}
-                                                @endforeach
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                <a href=" " class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                            </td>
-                                        </tr>
-                                        @endforeach
+    <tr>
+        <td>{{ $lecturer->name }}</td>
+        <td>
+            @foreach ($lecturer->projectTitles as $projectTitle)
+                {{ $projectTitle->title }}<br>
+            @endforeach
+        </td>
+    </tr>
+@endforeach
                                         </tbody>
                                     </table>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Lecturer;
+use App\Models\ProjectTitle;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 
@@ -49,6 +50,7 @@ class LecturerController extends Controller
         Lecturer::insert([
             'name' => $request->name,
             'email' => $request->email,
+            'project' => $request->project,
             'password' => Hash::make($request->password),
                   
         ]);
@@ -60,9 +62,12 @@ class LecturerController extends Controller
     public function showLecturers()
     {
         $lecturers = Lecturer::paginate(10); 
-
-        return view('supervisor.index', ['lecturers' => $lecturers]);
+        $project_titles = ProjectTitle::paginate(10); 
+        return view('supervisor.index', ['lecturers' => $lecturers, 'project_titles' => $project_titles]);  
         
+        return Lecturer::find(1)->ProjectTitles;   
     }
+
+
 
 }

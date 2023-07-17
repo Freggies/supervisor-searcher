@@ -50,14 +50,9 @@ Route::prefix('lecturer')->group(function(){
  
 });
 
-
-
-
 Route::prefix('supervisor')->group(function(){
-
-Route::get('/supervisors', [SupervisorController::class, 'supervisors'])->name('supervisor.index');
 Route::get('/supervisors', [LecturerController::class, 'showLecturers'])->name('supervisor.index');
-Route::get('/supervisors', [ProjectTitleController::class, 'showProjects'])->name('supervisor.index');
+
 
 });
 

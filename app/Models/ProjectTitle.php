@@ -7,10 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProjectTitle extends Model
 {
-    protected $fillable = ['title'];
+    protected $fillable = [
+        'id',
+        'title',    
+        'lecturer_id'
+    ];
 
-    // Define the relationship with Supervisor
-    public function lecturers()
+   
+    public function lecturer()
     {
         return $this->belongsTo(Lecturer::class);
     }
