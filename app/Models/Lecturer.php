@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\ProjectTitle;
+use App\Models\User;
 
 
 
@@ -51,5 +52,10 @@ class Lecturer extends Authenticatable
     public function ProjectTitles()
     {
         return $this->hasMany(ProjectTitle::class,'lecturer_id');
+    }
+
+    public function Users()
+    {
+        return $this->hasMany(User::class,'lecturer_id');
     }
 }

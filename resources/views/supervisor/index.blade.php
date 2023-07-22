@@ -1,5 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
+        
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Supervisor List') }}
         </h2>
@@ -23,22 +24,31 @@
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Status
                                             </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Supervisor
+                                            </th>
                                             <th scope="col" class="relative px-6 py-3">
                                                 <span class="sr-only"></span>
                                             </th>
                                         </tr>
                                         </thead>
-                                        <tbody class="bg-white divide-y divide-gray-200">
-                                        @foreach ($lecturers as $lecturer)
-    <tr>
-        <td>{{ $lecturer->name }}</td>
-        <td>
-            @foreach ($lecturer->projectTitles as $projectTitle)
-                {{ $projectTitle->title }}<br>
-            @endforeach
-        </td>
-    </tr>
-@endforeach
+                                                <tbody class="bg-white divide-y divide-gray-200">
+                                                  @foreach ($lecturers as $lecturer)
+                                                   <tr>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                        {{ $lecturer->name }}
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" colspan="2">
+                                                        @foreach ($lecturer->projectTitles as $projectTitle)
+                                                            {{ $projectTitle->title }}<br>
+                                                        @endforeach
+                                                    </td>
+                                                    
+                                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                                        <button type="button" class="btn btn-outline-success">Add Supervisor</button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
 

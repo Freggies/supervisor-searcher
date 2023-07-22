@@ -8,6 +8,7 @@ use App\Models\Lecturer;
 use App\Models\ProjectTitle;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use App\Models\User;
 
 class LecturerController extends Controller
 {
@@ -68,6 +69,17 @@ class LecturerController extends Controller
         return Lecturer::find(1)->ProjectTitles;   
     }
 
+    public function addFriend($userId, $lecturerId)
+    {
+        $user = User::findOrFail($userId);
+        $lecturer = Lecturer::findOrFail($lecturerId);
+    
+        $user->lecturers()->create(['lecturer_id' => $lecturer->id]);
+    
+        return response()->json([
+            'message' => 'Lecturer added as a friend successfully'
+        ]);
+    }
 
 
 }

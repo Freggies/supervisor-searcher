@@ -156,15 +156,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                List of Lecturer
-                <i class=""></i>
-              </p>
-            </a>
-          </li>
+         
 
           <a href="{{route('lecturer.logout')}}" button type="button" class="btn btn-dark" >Log Out</a>
          
