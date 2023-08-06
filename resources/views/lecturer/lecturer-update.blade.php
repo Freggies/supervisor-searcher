@@ -1,4 +1,4 @@
-  @extends('lecturer.lecturer_master')
+@extends('lecturer.lecturer_master')
   @section('lecturer')
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
@@ -110,7 +110,7 @@
             </a>
           </li>       
           <li class="nav-item">
-            <a href="{{route('lecturer.updatepage')}}" class="nav-link">
+            <a href="" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Update Information
@@ -150,14 +150,14 @@
       </div>
      @endif
 
-    <h3 text-align: right;>Welcome: {{ Auth::guard('lecturer')->user()->name}}</h3>
+    
 
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Student Information</h1>
+            <h1 class="m-0">Update Information</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -171,25 +171,16 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <!-- Info boxes -->
-        <div class="row">
-          <div class="col-12 col-sm-6 col-md-3">
-          </div>
-          </div>
-          <!-- /.col -->
-          <!-- fix for small devices only -->
-          <div class="clearfix hidden-md-up"></div>
-          <div class="col-12 col-sm-6 col-md-3">
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-12 col-sm-6 col-md-3">
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-        </div>
+    <form action="{{ route('lecturer.update') }}" method="POST">
+    @csrf
+    <input type="hidden" name="id" value="{{ Auth::guard('lecturer')->user()->id }}">
+    <input type="text" name="name" value="{{ Auth::guard('lecturer')->user()->name }}"><br>
+    <input type="text" name="email" value="{{ Auth::guard('lecturer')->user()->email }}"><br>
+    <input type="password" name="password" value=""><br>
+    <button type="submit">Update</button>
+</form>
+
+
 
     </section>
     <!-- /.content -->

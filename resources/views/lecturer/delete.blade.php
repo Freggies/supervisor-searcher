@@ -1,4 +1,4 @@
-  @extends('lecturer.lecturer_master')
+@extends('lecturer.lecturer_master')
   @section('lecturer')
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
@@ -150,8 +150,6 @@
       </div>
      @endif
 
-    <h3 text-align: right;>Welcome: {{ Auth::guard('lecturer')->user()->name}}</h3>
-
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
@@ -171,27 +169,14 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <!-- Info boxes -->
-        <div class="row">
-          <div class="col-12 col-sm-6 col-md-3">
-          </div>
-          </div>
-          <!-- /.col -->
-          <!-- fix for small devices only -->
-          <div class="clearfix hidden-md-up"></div>
-          <div class="col-12 col-sm-6 col-md-3">
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-12 col-sm-6 col-md-3">
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-        </div>
+                                     <form action="{{ route('delete.supervisee') }}" method="post">
+                                        @csrf
+                                        <!-- Add input fields for the user's information -->
+                                        <input type="hidden" name="id" value="Auth::guard('lecturer')->user()->id">
+                                        <input type="text" name="lecturer_id" value="{{ Auth::guard('lecturer')->user()->id }}">
+                                        <button type="submit">Delete Supervisor</button>
+                                    </form>
 
-    </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

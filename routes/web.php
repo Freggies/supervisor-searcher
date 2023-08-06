@@ -48,12 +48,31 @@ Route::prefix('lecturer')->group(function(){
     Route::post('/register/create',[LecturerController::class, 'LecturerRegisterCreate'])->name('lecture.register.create')->middleware('lecturer'); 
     Route::get('/projects/create',[ProjectTitleController::class, 'CreateProject'])->name('projecttitle.create');
     Route::post('/projects',[ProjectTitleController::class, 'StoreProject'])->name('projecttitle.store');
+    Route::get('/updates', [LecturerController::class, 'gotoupdate'])->name('lecturer.updatepage');
+    Route::post('/update', [LecturerController::class, 'update'])->name('lecturer.update');
+    Route::get('/accept', [LecturerController::class, 'viewrequest'])->name('lecturer.accept');
+    Route::get('/showstudent', [LecturerController::class, 'showstudent'])->name('show.student');
+    Route::get('/deletestudent', [LecturerController::class, 'deletePages'])->name('delete.student');
+    Route::post('/deletesupervisee', [LecturerController::class, 'deleteSupervisee'])->name('delete.supervisee'); 
  
 });
 
 Route::prefix('supervisor')->group(function(){
 Route::get('/listofsupervisor', [LecturerController::class, 'showLecturers'])->name('supervisor.index');
-Route::post('users/{userId}/lecturers/{lecturerId}/add-friend', [UserController::class, 'addFriend']);
 
 });
+
+
+Route::post('/add-supervisor',[UserController::class, 'addSupervisor'])->name('add-supervisor');
+Route::get('/add-supervisor',[UserController::class, 'addSupervisor'])->name('add-supervisor');
+Route::post('/addpages',[UserController::class, 'addPages'])->name('addpages');
+Route::get('/addpages',[UserController::class, 'addPages'])->name('addpages');
+
+
+
+
+
+
+
+
 

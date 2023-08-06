@@ -9,13 +9,29 @@ use App\Models\ProjectTitle;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use App\Models\User;
+use DB;
 
 class LecturerController extends Controller
 {
-    public function Index(){
-        return view('lecturer.lecturer_login');
+    public function Index()
+    {
+        $lecturers = Lecturer::all();
+        $users = User::all();
+        $users = request()->get('users');
+
+        return view('lecturer.lecturer_login',compact('lecturers'));
     }
 
+    public function showstudent()
+    {
+        
+        $lecturerId = Auth::guard('lecturer')->user()->id; 
+
+        $users = User::where('lecturer_id', $lecturerId)->get();
+        
+        return view('lecturer.lecturer_accept', compact('users'));
+    }
+    
     public function Dashboard(){
 
         return view('lecturer.index');
@@ -69,17 +85,78 @@ class LecturerController extends Controller
         return Lecturer::find(1)->ProjectTitles;   
     }
 
-    public function addFriend($userId, $lecturerId)
+    public function showSupervisorRequests()
     {
-        $user = User::findOrFail($userId);
-        $lecturer = Lecturer::findOrFail($lecturerId);
+        $lecturer = Auth::user(); // Assuming the lecturer is the authenticated user
+        $supervisorRequests = $lecturer->students()->where('status', 'pending')->get();
     
-        $user->lecturers()->create(['lecturer_id' => $lecturer->id]);
+        return view('lecturer.supervisor-requests', ['supervisorRequests' => $supervisorRequests]);
+    }
     
-        return response()->json([
-            'message' => 'Lecturer added as a friend successfully'
-        ]);
+    public function viewrequest()
+    {
+        return view ('lecturer.lecturer_accept');
     }
 
+    public function gotoupdate()
+    {
+        return view ('lecturer.lecturer-update');
+    }
 
+    public function update(Request $request)
+    {
+        $request->validate([ 
+            'id' => 'required|integer',
+            'name' => 'required|string|max:255', 
+            'email' => 'required|string|max:255', 
+            'password' => 'required|string|max:255',            
+        ]);  
+    
+        // Find the user by the provided 'id'
+        $lecturer = Lecturer::find($request->id);
+    
+        // Check if the user exists
+        if (!$lecturer) {
+            return back()->withErrors(['message' => 'User not found']);
+        }
+    
+        // Update the user's name
+        $lecturer->name = $request->name;
+        $lecturer->email = $request->email;
+        if ($request->filled('password')) {
+            $lecturer->password = bcrypt($request->password);
+        }
+        $lecturer->save();
+
+    return redirect()->back()->with('success', 'Information Updated.');
+    }
+
+    public function deletePages(Request $request, User $users)
+    {
+        return view('lecturer.delete');
+    }
+
+    public function deleteSupervisee(Request $request)
+    {    
+        $request->validate([
+            'id' => 'required|integer', // Make sure 'id' is provided and is an integer
+            'lecturer_id' => 'required|string|max:255',            
+        ]);  
+    
+        // Find the user by the provided 'id'
+        $lecturers = Lecturer::find($request->id);
+        // Check if the user exists
+        if (!$lecturers) {
+            return back()->withErrors(['message' => 'User not found']);
+        }
+    
+        // Update the user's name
+        $lecturers->lecturer_id = $request->lecturer_id;
+        $lecturers->save();
+
+
+    return redirect()->back()->with('success', 'Supervisor request sent.');
+    }
+
+    
 }

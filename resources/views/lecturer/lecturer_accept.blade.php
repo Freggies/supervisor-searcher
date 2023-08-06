@@ -1,4 +1,4 @@
-  @extends('lecturer.lecturer_master')
+@extends('lecturer.lecturer_master')
   @section('lecturer')
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
@@ -13,7 +13,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
+        <a href="" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -44,8 +44,8 @@
         </div>
       </li>
 
-      <!-- Messages Dropdown Menu -->
-   
+
+
       <li class="nav-item">
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
           <i class="fas fa-th-large"></i>
@@ -91,11 +91,11 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href="" class="nav-link active">
+            <a href="{{route('lecturer.dashboard')}}" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
-                <i class="{{route('lecturer.dashboard')}}"></i>
+                <i class=""></i>
               </p>
             </a>
           </li>
@@ -118,16 +118,17 @@
               </p>
             </a>
           </li>
+
           <li class="nav-item">
-            <a href="{{route('show.student')}}" class="nav-link">
+            <a href="" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Supervise Request
-                <i class="badge badge-info right"></i>
+                <i class=""></i>
               </p>
             </a>
           </li>
-         
+
 
           <a href="{{route('lecturer.logout')}}" button type="button" class="btn btn-dark" >Log Out</a>
          
@@ -149,9 +150,6 @@
         </button>
       </div>
      @endif
-
-    <h3 text-align: right;>Welcome: {{ Auth::guard('lecturer')->user()->name}}</h3>
-
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
@@ -171,25 +169,41 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <!-- Info boxes -->
-        <div class="row">
-          <div class="col-12 col-sm-6 col-md-3">
-          </div>
-          </div>
-          <!-- /.col -->
-          <!-- fix for small devices only -->
-          <div class="clearfix hidden-md-up"></div>
-          <div class="col-12 col-sm-6 col-md-3">
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-12 col-sm-6 col-md-3">
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-        </div>
+    <centre><table class="min-w-full divide-y divide-gray-200">
+                                        <thead class="bg-gray-50">
+                                        <tr>
+                                            
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Name
+                                            </th>
+                                            
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Status
+                                            </th>
+                                           
+                                            <th scope="col" class="relative px-6 py-3">
+                                                <span class="sr-only"></span>
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                            @foreach ($users as $user)
+                                                <tr>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                        {{ $user->id }}
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                        {{ $user->name }}
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                                        <a href="{{route('delete.student')}}" class="btn btn-outline-success">Delete Supervisee</a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+     
+</centre>
 
     </section>
     <!-- /.content -->

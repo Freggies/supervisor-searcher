@@ -9,19 +9,49 @@ use App\Models\Lecturer;
 use App\Models\ProjectTitle;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use DB;
 
 
 class UserController extends Controller
 {
-    public function addFriend($userId, $lecturerId)
-{
-    $user = User::findOrFail($userId);
-    $lecturer = Lecturer::findOrFail($lecturerId);
 
-    $user->lecturers()->create(['lecturer_id' => $lecturer->id]);
+    public function Index()
+    {
+        $users = User::all();
+        $lecturers = Lecturer::all();
+        $lecturers = request()->get('lecturers');
 
-    return response()->json([
-        'message' => 'Lecturer added as a friend successfully'
-    ]);
-}
+        return view('dashboard', compact('users'));
+    }
+
+    public function addSupervisor(Request $request)
+    {    
+        $request->validate([
+            'id' => 'required|integer', // Make sure 'id' is provided and is an integer
+            'lecturer_id' => 'required|string|max:255',            
+        ]);  
+    
+        // Find the user by the provided 'id'
+        $user = User::find($request->id);
+    
+        // Check if the user exists
+        if (!$user) {
+            return back()->withErrors(['message' => 'User not found']);
+        }
+    
+        // Update the user's name
+        $user->lecturer_id = $request->lecturer_id;
+        $user->save();
+
+
+    return redirect()->back()->with('success', 'Supervisor request sent.');
+    }
+    
+
+    public function addPages(Request $request, User $users)
+    {
+        return view('supervisor.addsupervisor');
+    }
+
+    
 }
