@@ -69,7 +69,7 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
 
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+        <a href="#" class="d-block">{{ Auth::guard('lecturer')->user()->name}}</a>
         </div>
       </div>
 
@@ -91,7 +91,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href="" class="nav-link active">
+            <a href="{{route('lecturer.dashboard')}}" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -171,14 +171,35 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
+    <table>
     <form action="{{ route('lecturer.update') }}" method="POST">
-    @csrf
-    <input type="hidden" name="id" value="{{ Auth::guard('lecturer')->user()->id }}">
-    <input type="text" name="name" value="{{ Auth::guard('lecturer')->user()->name }}"><br>
-    <input type="text" name="email" value="{{ Auth::guard('lecturer')->user()->email }}"><br>
-    <input type="password" name="password" value=""><br>
-    <button type="submit">Update</button>
-</form>
+        @csrf
+        <input type="hidden" name="id" value="{{ Auth::guard('lecturer')->user()->id }}">
+
+        <tr>
+            <td><label for="name">Name:</label></td>
+            <td><input type="text" id="name" name="name" value="{{ Auth::guard('lecturer')->user()->name }}"></td>
+        </tr>
+        <tr>
+            <td><label for="email">Email:</label></td>
+            <td><input type="text" id="email" name="email" value="{{ Auth::guard('lecturer')->user()->email }}"></td>
+        </tr>
+        <tr>
+            <td><label for="password">New Password:</label></td>
+            <td><input type="password" id="password" name="password" value=""></td>
+        </tr>
+        <tr>
+            <td><label for="confirm_password">Confirm Password:</label></td>
+            <td><input type="password" id="confirm_password" name="confirm_password" value=""></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-center"><button type="submit">Update</button></td>
+        </tr>
+    </form>
+</table>
+
+
+
 
 
 

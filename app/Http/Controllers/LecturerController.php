@@ -136,27 +136,7 @@ class LecturerController extends Controller
         return view('lecturer.delete');
     }
 
-    public function deleteSupervisee(Request $request)
-    {    
-        $request->validate([
-            'id' => 'required|integer', // Make sure 'id' is provided and is an integer
-            'lecturer_id' => 'required|string|max:255',            
-        ]);  
-    
-        // Find the user by the provided 'id'
-        $lecturers = Lecturer::find($request->id);
-        // Check if the user exists
-        if (!$lecturers) {
-            return back()->withErrors(['message' => 'User not found']);
-        }
-    
-        // Update the user's name
-        $lecturers->lecturer_id = $request->lecturer_id;
-        $lecturers->save();
 
-
-    return redirect()->back()->with('success', 'Supervisor request sent.');
-    }
 
     
 }

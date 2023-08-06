@@ -69,7 +69,7 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
 
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+        <a href="#" class="d-block">{{ Auth::guard('lecturer')->user()->name}}</a>
         </div>
       </div>
 
@@ -169,39 +169,55 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <centre><table class="min-w-full divide-y divide-gray-200">
-                                        <thead class="bg-gray-50">
-                                        <tr>
-                                            
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Name
-                                            </th>
-                                            
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Status
-                                            </th>
-                                           
-                                            <th scope="col" class="relative px-6 py-3">
-                                                <span class="sr-only"></span>
-                                            </th>
-                                        </tr>
-                                        </thead>
-                                        <tbody class="bg-white divide-y divide-gray-200">
-                                            @foreach ($users as $user)
-                                                <tr>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                        {{ $user->id }}
-                                                    </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                        {{ $user->name }}
-                                                    </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                        <a href="{{route('delete.student')}}" class="btn btn-outline-success">Delete Supervisee</a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+    <centre><table class="table min-w-full divide-y divide-gray-200">
+    <thead class="bg-gray-50">
+        <tr>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                ID
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Name
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Email
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Class
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Phone Number
+            </th>
+            <th scope="col" class="relative px-6 py-3">
+                <span class="sr-only"></span>
+            </th>
+        </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200">
+        @foreach ($users as $user)
+            <tr>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {{ $user->id }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {{ $user->name }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {{ $user->email }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {{ $user->class }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {{ $user->phone_num }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <a href="{{ route('delete.student', ['id' => $user->id]) }}" class="btn btn-outline-success">Delete Supervisee</a>
+                </td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
+
      
 </centre>
 

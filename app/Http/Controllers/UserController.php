@@ -53,5 +53,25 @@ class UserController extends Controller
         return view('supervisor.addsupervisor');
     }
 
+    public function gotowelcome(Request $request, User $users)
+    {
+        return view('welcome');
+    }
+
+    public function deleteSupervisee(Request $request)
+    {    
+        
+        $request->validate([
+            'lecturer_id' => 'required|exists:lecturers,id',
+        ]);
+
+        $user->lecturer_id = $request->lecturer_id;
+        $user->save();
+
+    
+        return redirect()->back()->with('success', 'Lecturer ID updated successfully.');
+
+    }
+
     
 }

@@ -53,7 +53,7 @@ Route::prefix('lecturer')->group(function(){
     Route::get('/accept', [LecturerController::class, 'viewrequest'])->name('lecturer.accept');
     Route::get('/showstudent', [LecturerController::class, 'showstudent'])->name('show.student');
     Route::get('/deletestudent', [LecturerController::class, 'deletePages'])->name('delete.student');
-    Route::post('/deletesupervisee', [LecturerController::class, 'deleteSupervisee'])->name('delete.supervisee'); 
+   
  
 });
 
@@ -61,8 +61,8 @@ Route::prefix('supervisor')->group(function(){
 Route::get('/listofsupervisor', [LecturerController::class, 'showLecturers'])->name('supervisor.index');
 
 });
-
-
+Route::get('/welcome', [UserController::class, 'gotowelcome'])->name('gotowelcomes');
+Route::post('/deletesupervisee', [UserController::class, 'deleteSupervisee'])->name('delete.supervisee'); 
 Route::post('/add-supervisor',[UserController::class, 'addSupervisor'])->name('add-supervisor');
 Route::get('/add-supervisor',[UserController::class, 'addSupervisor'])->name('add-supervisor');
 Route::post('/addpages',[UserController::class, 'addPages'])->name('addpages');

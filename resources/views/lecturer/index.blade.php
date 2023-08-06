@@ -69,7 +69,7 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
 
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{ Auth::guard('lecturer')->user()->name}}</a>
         </div>
       </div>
 
@@ -157,7 +157,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Student Information</h1>
+            <h1 class="m-0">Supervisee finder</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">

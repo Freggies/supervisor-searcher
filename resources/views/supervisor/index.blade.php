@@ -29,13 +29,16 @@
                                                 Name
                                             </th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Email
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Project
                                             </th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Status
+                                                
                                             </th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Supervisor
+                                                Status
                                             </th>
                                             <th scope="col" class="relative px-6 py-3">
                                                 <span class="sr-only"></span>
@@ -50,6 +53,9 @@
                                                     </td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                         {{ $lecturer->name }}
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                        {{ $lecturer->email }}
                                                     </td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" colspan="2">
                                                         @foreach ($lecturer->projectTitles as $projectTitle)
