@@ -19,11 +19,10 @@ class UserController extends Controller
     {
         $users = User::all();
         $lecturers = Lecturer::all();
-        $lecturers = request()->get('lecturers');
-
-        return view('dashboard', compact('users'));
+    
+        return view('dashboard', compact('users', 'lecturers'));
     }
-
+    
     public function addSupervisor(Request $request)
     {    
         $request->validate([
@@ -47,10 +46,35 @@ class UserController extends Controller
     return redirect()->back()->with('success', 'Supervisor request sent.');
     }
     
-
-    public function addPages(Request $request, User $users)
+    public function addPages(Request $request)
     {
-        return view('supervisor.addsupervisor');
+        // Get the selected lecturer ID from the URL
+        $selectedLecturerId = $request->query('lecturer');
+    
+        // Find the selected lecturer by ID
+        $selectedLecturer = Lecturer::find($selectedLecturerId);
+    
+        // Check if the lecturer is found
+        if (!$selectedLecturer) {
+            abort(404); // You can customize this error response as needed
+        }
+    
+        // You can pass the selected lecturer details to the view
+        return view('supervisor.addsupervisor', ['selectedLecturer' => $selectedLecturer]);
+    }  
+    
+    public function showLecturerDetails($lecturerId)
+    {
+        // Find the lecturer by ID
+        $lecturer = Lecturer::find($lecturerId);
+    
+        // Check if the lecturer is found
+        if (!$lecturer) {
+            abort(404); // You can customize this error response as needed
+        }
+    
+        // You can pass the lecturer details to the view
+        return view('lecturer.details', ['lecturer' => $lecturer]);
     }
 
     public function gotowelcome(Request $request, User $users)
