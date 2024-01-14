@@ -63,6 +63,27 @@ class UserController extends Controller
         return view('supervisor.addsupervisor', ['selectedLecturer' => $selectedLecturer]);
     }  
     
+    public function dashboard(Request $request)
+    {
+        // Get the selected lecturer ID from the URL
+        $selectedLecturerId = $request->query('lecturer');
+    
+        // Find the selected lecturer by ID
+        $selectedLecturer = Lecturer::find($selectedLecturerId);
+    
+        // Check if the lecturer is found
+        if (!$selectedLecturer) {
+            abort(404); // You can customize this error response as needed
+        }
+    
+        // Load the user's supervisors
+        $userSupervisors = auth()->user()->supervisors;
+    
+        // You can pass the selected lecturer and user's supervisors to the view
+        return view('dashboard', ['selectedLecturer' => $selectedLecturer, 'userSupervisors' => $userSupervisors]);
+    }
+    
+    
     public function showLecturerDetails($lecturerId)
     {
         // Find the lecturer by ID
